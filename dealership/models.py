@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Q
@@ -46,7 +47,13 @@ class Sale(models.Model):
         limit_choices_to=CONTENT_TYPE_CHOICES,
     )
     object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey("content_type", "object_id")
     price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["content_type", "object_id"]),
+        ]
 
     def get_instance(self):
         return self.content_type.get_object_for_this_type(pk=self.object_id)
