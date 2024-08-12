@@ -55,8 +55,8 @@ class Sale(models.Model):
             models.Index(fields=["content_type", "object_id"]),
         ]
 
-    def get_instance(self):
+    def get_related_object_instance(self):
         return self.content_type.get_object_for_this_type(pk=self.object_id)
 
     def __str__(self):
-        return f"{self.get_instance()} sold for ${self.price}"
+        return f"{self.get_related_object_instance()} sold for ${self.price}"
