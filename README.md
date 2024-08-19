@@ -2,7 +2,7 @@
 
 This repository demonstrates how to limit content types in Django model (ORM).
 
-For more information check out the [post](#).
+For more information check out the [post](https://testdriven.io/blog/django-limiting-content-types/).
 
 ## Want to use this project?
 
